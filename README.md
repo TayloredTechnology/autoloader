@@ -1,18 +1,48 @@
 # autoloader
 
-<overview>
+This module is an extension of the awesome [autoRequire](https://www.npmjs.com/package/auto-require) module. It provides some syntactical sugar and segregation of production and development environments.
+
+Not all npm modules are capable of being autoloaded, as such this module hooks into global variable: `exModules` for compatibility exclusion.
+
+Primary benefit is to avoid 10-15 lines of `require` and `const` declarations in every file across a project.
 
 ## Deployment
 
 Quickstart overview of getting autoloader deployed. For full deployment and management information see the docs @ DOCCOWEBSITE
 
-### Essentials
-
-### ENV's
-
 ### Installing
+```
+npm i -P @tayloredtechnology/autoloader
+```
+### Global Variables
+**autoLoader** works best if registering the following global variables on your entrypoint script
+```
+global.exModules = []		// list of modules that should be ignored from autoLoading
+global.autoLoader = require('@tayloredtechnology/autoloader').general		// 'production' npm modules only
+global.autoLoaderDev = require('@tayloredtechnology/autoloader').development	// 'development' npm modules only
+```
+`exModules` is the only true 'global' requirement, others can be loaded per-file but the central caching benefit may be sacrified
 
 ### Examples
+
+```
+# Production module:
+$ = autoLoader('js-yaml')
+
+# or
+$ = autoLoader(['js-yaml', 'shelljs'])
+
+# Using
+$.jsYaml()
+```
+aliases can also be supplied
+```
+$ = autoLoader('shelljs', {sh: 'shelljs'})
+
+# both are available for use
+$.shelljs()
+$.sh()
+```
 
 ## Development
 

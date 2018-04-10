@@ -18,12 +18,16 @@
 	},
 	"keywords": [],
 	"dependencies": {
+		"auto-require": "^3.0.2",
 		"debug": "^3.1.0",
+		"decamelize": "^2.0.0",
 		"fastest-validator": "^0.6.6",
 		"is-installed": "^2.0.1",
+		"lodash": "^4.17.5",
 		"per-env": "^1.0.2",
 		"pino": "^4.16.1",
 		"pino-debug": "^1.1.1",
+		"read-pkg": "^3.0.0",
 		"redrun": "^6.0.2",
 		"tap-lochnest": "^1.1.2",
 		"tape": "^4.9.0",
@@ -51,11 +55,10 @@
 	"engines": {
 		"node": ">=6"
 	},
-	"files": [
-		"index.js"
-	],
+	"files": ["index.js"],
 	"scripts": {
-		"codecov:check": "nyc check-coverage --branches=50 --functions=50 --lines=90 --statements=50",
+		"codecov:check":
+			"nyc check-coverage --branches=30 --functions=30 --lines=90 --statements=30",
 		"codecov:generate": "nyc report --reporter=text-lcov > coverage.lcov",
 		"codecov:report": "nyc report --reporter=text",
 		"codecov:upload": "codecov -t ",
@@ -65,18 +68,21 @@
 		"format:xo": "xo ./**/*.js",
 		"posttest": "redrun -p codecov:report codecov:check",
 		"posttest:ci": "redrun -p codecov:*",
-		"prestart:production": "tape '{,!(node_modules)/**/}*.?(sanity|api).js' | tap-dot",
+		"prestart:production":
+			"tape '{,!(node_modules)/**/}*.?(sanity|api).js' | tap-dot",
 		"test": "per-env",
-		"test:api": "nyc --cache --per-file --silent tape '{,!(node_modules)/**/}*.?(api).js' | tap-dot",
-		"test:ci": "nyc --cache --per-file --silent tape '{,!(node_modules)/**/}*.?(spec|sanity|api).js' | tap-dot",
-		"test:development": "nyc --cache --per-file --silent tape '{,!(node_modules)/**/}*.?(spec|sanity).js' | tap-dot",
-		"test:sanity": "nyc --cache --per-file --silent tape '{,!(node_modules)/**/}*.?(sanity).js' | tap-dot"
+		"test:api":
+			"nyc --cache --per-file --silent tape '{,!(node_modules)/**/}*.?(api).js' | tap-dot",
+		"test:ci":
+			"nyc --cache --per-file --silent tape '{,!(node_modules)/**/}*.?(spec|sanity|api).js' | tap-dot",
+		"test:development":
+			"nyc --cache --per-file --silent tape '{,!(node_modules)/**/}*.?(spec|sanity).js' | tap-dot",
+		"test:sanity":
+			"nyc --cache --per-file --silent tape '{,!(node_modules)/**/}*.?(sanity).js' | tap-dot"
 	},
 	"license": "SEE LICENSE IN LICENSE",
 	"commitlint": {
-		"extends": [
-			"@commitlint/config-conventional"
-		]
+		"extends": ["@commitlint/config-conventional"]
 	},
 	"husky": {
 		"hooks": {
@@ -87,28 +93,16 @@
 	"lint-staged": {
 		"linters": {
 			"*.{js}": "xo",
-			"*.{css,md}": [
-				"prettier --write",
-				"git add"
-			],
+			"*.{css,md}": ["prettier --write", "git add"],
 			"*.{spec,sanity,api}.js": [
-				"nyc --per-file --check-coverage --branches=50 --functions=50 --lines=90 --statements=50 tape"
+				"nyc --per-file --check-coverage --branches=30 --functions=30 --lines=30 --statements=30 tape"
 			]
 		},
-		"ignore": [
-			"CHANGELOG.md"
-		]
+		"ignore": ["CHANGELOG.md"]
 	},
 	"xo": {
-		"globals": [
-			"$",
-			"_",
-			"co"
-		],
-		"ignores": [
-			"app/backends/**/*.js",
-			"python_modules/"
-		],
+		"globals": ["$", "_", "co", "exModules"],
+		"ignores": ["app/backends/**/*.js", "python_modules/"],
 		"prettier": true,
 		"rules": {
 			"generator-star-spacing": "off",
