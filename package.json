@@ -1,117 +1,128 @@
 {
-	"name": "@tayloredtechnology/autoloader",
-	"description": "",
-	"homepage": "https://github.com/TayloredTechnology/autoloader#readme",
-	"version": "0.1.0",
-	"main": "index.js",
-	"author": {
-		"name": "Taylored Technology",
-		"url": "https://tayloredtechnology.net"
-	},
-	"repository": {
-		"email": "TayloredTechnology@protonmail.ch",
-		"type": "git",
-		"url": "git+https://github.com/TayloredTechnology/autoloader.git"
-	},
-	"bugs": {
-		"url": "https://github.com/TayloredTechnology/autoloader/issues"
-	},
-	"keywords": [],
-	"dependencies": {
-		"auto-require": "^3.0.2",
-		"debug": "^3.1.0",
-		"decamelize": "^2.0.0",
-		"fastest-validator": "^0.6.6",
-		"is-installed": "^2.0.1",
-		"lodash": "^4.17.5",
-		"per-env": "^1.0.2",
-		"pino": "^4.16.1",
-		"pino-debug": "^1.1.1",
-		"read-pkg": "^3.0.0",
-		"redrun": "^6.0.2",
-		"tap-lochnest": "^1.1.2",
-		"tape": "^4.9.0",
-		"tape-promise": "^3.0.0"
-	},
-	"devDependencies": {
-		"@commitlint/cli": "^6.1.3",
-		"@commitlint/config-conventional": "^6.1.3",
-		"@commitlint/lint": "^6.1.3",
-		"@commitlint/prompt-cli": "^6.1.3",
-		"chuhai": "^1.2.0",
-		"clear-require": "^2.0.0",
-		"codecov": "^3.0.0",
-		"faker": "^4.1.0",
-		"husky": "^0.15.0-rc.13",
-		"lint-staged": "^7.0.4",
-		"nyc": "^11.6.0",
-		"prettier": "^1.11.1",
-		"tap-dot": "^1.0.5",
-		"tap-summary": "^4.0.0",
-		"tape-index": "^2.0.0",
-		"testdouble": "^3.7.0",
-		"xo": "^0.20.3"
-	},
-	"engines": {
-		"node": ">=6"
-	},
-	"files": ["index.js"],
-	"scripts": {
-		"codecov:check":
-			"nyc check-coverage --branches=30 --functions=30 --lines=90 --statements=30",
-		"codecov:generate": "nyc report --reporter=text-lcov > coverage.lcov",
-		"codecov:report": "nyc report --reporter=text",
-		"codecov:upload": "codecov -t ",
-		"commit": "commit",
-		"format": "redrun -p format:*",
-		"format:prettier": "prettier --write '**/*.{css,md}'",
-		"format:xo": "xo ./**/*.js",
-		"posttest": "redrun -p codecov:report codecov:check",
-		"posttest:ci": "redrun -p codecov:*",
-		"prestart:production":
-			"tape '{,!(node_modules)/**/}*.?(sanity|api).js' | tap-dot",
-		"test": "per-env",
-		"test:api":
-			"nyc --cache --per-file --silent tape '{,!(node_modules)/**/}*.?(api).js' | tap-dot",
-		"test:ci":
-			"nyc --cache --per-file --silent tape '{,!(node_modules)/**/}*.?(spec|sanity|api).js' | tap-dot",
-		"test:development":
-			"nyc --cache --per-file --silent tape '{,!(node_modules)/**/}*.?(spec|sanity).js' | tap-dot",
-		"test:sanity":
-			"nyc --cache --per-file --silent tape '{,!(node_modules)/**/}*.?(sanity).js' | tap-dot"
-	},
-	"license": "SEE LICENSE IN LICENSE",
-	"commitlint": {
-		"extends": ["@commitlint/config-conventional"]
-	},
-	"husky": {
-		"hooks": {
-			"commit-msg": "commitlint -e $GIT_PARAMS",
-			"pre-commit": "lint-staged"
-		}
-	},
-	"lint-staged": {
-		"linters": {
-			"*.{js}": "xo",
-			"*.{css,md}": ["prettier --write", "git add"],
-			"*.{spec,sanity,api}.js": [
-				"nyc --per-file --check-coverage --branches=30 --functions=30 --lines=30 --statements=30 tape"
-			]
-		},
-		"ignore": ["CHANGELOG.md"]
-	},
-	"xo": {
-		"globals": ["$", "_", "co", "exModules"],
-		"ignores": ["app/backends/**/*.js", "python_modules/"],
-		"prettier": true,
-		"rules": {
-			"generator-star-spacing": "off",
-			"import/no-extraneous-dependencies": "off",
-			"import/no-unassigned-import": "off",
-			"import/no-unresolved": "off",
-			"import/order": "off",
-			"operator-linebreak": "off"
-		},
-		"semicolon": false
-	}
+  "name": "@tayloredtechnology/autoloader",
+  "description": "",
+  "homepage": "https://github.com/TayloredTechnology/autoloader#readme",
+  "version": "0.1.1",
+  "main": "index.js",
+  "author": {
+    "name": "Taylored Technology",
+    "url": "https://tayloredtechnology.net"
+  },
+  "repository": {
+    "email": "TayloredTechnology@protonmail.ch",
+    "type": "git",
+    "url": "git+https://github.com/TayloredTechnology/autoloader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TayloredTechnology/autoloader/issues"
+  },
+  "keywords": [],
+  "dependencies": {
+    "auto-require": "^3.0.2",
+    "debug": "^3.1.0",
+    "decamelize": "^2.0.0",
+    "fastest-validator": "^0.6.6",
+    "is-installed": "^2.0.1",
+    "lodash": "^4.17.5",
+    "per-env": "^1.0.2",
+    "pino": "^4.16.1",
+    "pino-debug": "^1.1.1",
+    "read-pkg": "^3.0.0",
+    "redrun": "^6.0.2",
+    "tap-lochnest": "^1.1.2",
+    "tape": "^4.9.0",
+    "tape-promise": "^3.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^6.1.3",
+    "@commitlint/config-conventional": "^6.1.3",
+    "@commitlint/lint": "^6.1.3",
+    "@commitlint/prompt-cli": "^6.1.3",
+    "chuhai": "^1.2.0",
+    "clear-require": "^2.0.0",
+    "codecov": "^3.0.0",
+    "faker": "^4.1.0",
+    "husky": "^0.15.0-rc.13",
+    "lint-staged": "^7.0.4",
+    "nyc": "^11.6.0",
+    "prettier": "^1.11.1",
+    "tap-dot": "^1.0.5",
+    "tap-summary": "^4.0.0",
+    "tape-index": "^2.0.0",
+    "testdouble": "^3.7.0",
+    "xo": "^0.20.3"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "codecov:check": "nyc check-coverage --branches=30 --functions=30 --lines=90 --statements=30",
+    "codecov:generate": "nyc report --reporter=text-lcov > coverage.lcov",
+    "codecov:report": "nyc report --reporter=text",
+    "codecov:upload": "codecov -t ",
+    "commit": "commit",
+    "format": "redrun -p format:*",
+    "format:prettier": "prettier --write '**/*.{css,md}'",
+    "format:xo": "xo ./**/*.js",
+    "posttest": "redrun -p codecov:report codecov:check",
+    "posttest:ci": "redrun -p codecov:*",
+    "prestart:production": "tape '{,!(node_modules)/**/}*.?(sanity|api).js' | tap-dot",
+    "test": "per-env",
+    "test:api": "nyc --cache --per-file --silent tape '{,!(node_modules)/**/}*.?(api).js' | tap-dot",
+    "test:ci": "nyc --cache --per-file --silent tape '{,!(node_modules)/**/}*.?(spec|sanity|api).js' | tap-dot",
+    "test:development": "nyc --cache --per-file --silent tape '{,!(node_modules)/**/}*.?(spec|sanity).js' | tap-dot",
+    "test:sanity": "nyc --cache --per-file --silent tape '{,!(node_modules)/**/}*.?(sanity).js' | tap-dot"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "*.{js}": "xo",
+      "*.{css,md}": [
+        "prettier --write",
+        "git add"
+      ],
+      "*.{spec,sanity,api}.js": [
+        "nyc --per-file --check-coverage --branches=30 --functions=30 --lines=30 --statements=30 tape"
+      ]
+    },
+    "ignore": [
+      "CHANGELOG.md"
+    ]
+  },
+  "xo": {
+    "globals": [
+      "$",
+      "_",
+      "co",
+      "exModules"
+    ],
+    "ignores": [
+      "app/backends/**/*.js",
+      "python_modules/"
+    ],
+    "prettier": true,
+    "rules": {
+      "generator-star-spacing": "off",
+      "import/no-extraneous-dependencies": "off",
+      "import/no-unassigned-import": "off",
+      "import/no-unresolved": "off",
+      "import/order": "off",
+      "operator-linebreak": "off"
+    },
+    "semicolon": false
+  }
 }
