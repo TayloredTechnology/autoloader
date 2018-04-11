@@ -8,24 +8,22 @@ Primary benefit is to avoid 10-15 lines of `require` and `const` declarations in
 
 ## Deployment
 
-Quickstart overview of getting autoloader deployed. For full deployment and management information see the docs @ DOCCOWEBSITE
+Quickstart overview of getting autoloader deployed.
 
 ### Installing
+
 ```
 npm i -P @tayloredtechnology/autoloader
 ```
-### Global Variables
-**autoLoader** works best if registering the following global variables on your entrypoint script
-```
-global.exModules = []		// list of modules that should be ignored from autoLoading
-global.autoLoader = require('@tayloredtechnology/autoloader').general		// 'production' npm modules only
-global.autoLoaderDev = require('@tayloredtechnology/autoloader').development	// 'development' npm modules only
-```
-`exModules` is the only true 'global' requirement, others can be loaded per-file but the central caching benefit may be sacrified
 
 ### Examples
 
 ```
+# Initial Setup
+loader = require('autoLoader')
+loader.init({aliases: {sh: 'shelljs'}, exModules: ['per-env']}
+global.autoLoader = loader.general
+
 # Production module:
 $ = autoLoader('js-yaml')
 
@@ -35,7 +33,9 @@ $ = autoLoader(['js-yaml', 'shelljs'])
 # Using
 $.jsYaml()
 ```
+
 aliases can also be supplied
+
 ```
 $ = autoLoader('shelljs', {sh: 'shelljs'})
 

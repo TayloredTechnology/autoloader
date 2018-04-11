@@ -4,15 +4,9 @@ const decamelize = require('decamelize')
 
 const alwaysIgnore = ['per-env', 'pino-debug']
 
-if (global.exModules) {
-	global.exModules = alwaysIgnore
-} else {
-	global.exModules = _.uniq(_.concat(global.exModules, alwaysIgnore))
-}
-debug('global.exModules', global.exModules)
-
 const ns = {}
 let aliases = {}
+let exModules = []
 let devToggle = false
 
 function autoLoad(modules) {
@@ -90,6 +84,15 @@ ns.development = (modules, aliasRequires) => {
 	if (aliasRequires) aliases = _.merge(aliases, _.cloneDeep(aliasRequires))
 	devToggle = true
 	return autoLoad(modules)
+}
+
+ns.init = setup => {
+	if (_.has(setup, 'aliases'))
+		aliases = _.merge(aliases, _.cloneDeep(setup.alias))
+	if (_.has(setup, 'alias'))
+		aliases = _.merge(aliases, _.cloneDeep(setup.alias))
+	if (_.has(setup, 'exModules'))
+		exModules = _.merge(aliases, _.cloneDeep(setup.exModules))
 }
 
 module.exports = ns
