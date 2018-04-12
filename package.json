@@ -2,7 +2,7 @@
   "name": "@tayloredtechnology/autoloader",
   "description": "",
   "homepage": "https://github.com/TayloredTechnology/autoloader#readme",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "main": "index.js",
   "author": {
     "name": "Taylored Technology",
