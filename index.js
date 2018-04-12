@@ -6,7 +6,7 @@ const alwaysIgnore = ['per-env', 'pino-debug']
 
 const ns = {}
 let aliases = {}
-let exModules = []
+let exModules = alwaysIgnore
 let devToggle = false
 
 function autoLoad(modules) {
@@ -19,12 +19,7 @@ function autoLoad(modules) {
 
 	let npm
 	const requireModules = {}
-	let without
-	if (_.isArray(exModules)) {
-		without = _.uniq(_.concat(exDevDependencies, exModules))
-	} else {
-		without = _.uniq(exDevDependencies)
-	}
+	const without = _.uniq(_.concat(exDevDependencies, exModules))
 
 	if ((typeof modules).includes('undefined')) {
 		npm = require('auto-require')({
@@ -88,7 +83,7 @@ ns.development = (modules, aliasRequires) => {
 
 ns.init = setup => {
 	if (_.has(setup, 'aliases'))
-		aliases = _.merge(aliases, _.cloneDeep(setup.alias))
+		aliases = _.merge(aliases, _.cloneDeep(setup.aliases))
 	if (_.has(setup, 'alias'))
 		aliases = _.merge(aliases, _.cloneDeep(setup.alias))
 	if (_.has(setup, 'exModules'))
